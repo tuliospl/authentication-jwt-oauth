@@ -13,16 +13,18 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 public class WebSecurityConfig {
 
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) {
-        http.csrf( (csrf) -> {
-                csrf.disable();
-            })
-            .authorizeHttpRequests((auth) -> {
-                auth.requestMatchers(HttpMethod.GET,"/open").permitAll()
-                    .requestMatchers(HttpMethod.POST, "/users").permitAll()
-                    .requestMatchers(HttpMethod.POST,"/login").permitAll()
-                    .anyRequest().authenticated();
-            })
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        http.csrf(csrf -> csrf.disable())
+            .headers(headers -> headers.frameOptions(frame -> frame.disable()))
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(HttpMethod.GET, "/open").permitAll()
+                .requestMatchers(HttpMethod.POST, "/users").permitAll()
+                .requestMatchers(HttpMethod.POST, "/login").permitAll()
+                .requestMatchers("/h2-console/**").permitAll()
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form.disable())
+            .httpBasic(basic -> basic.disable())
             .addFilterBefore(new AuthFilter(), UsernamePasswordAuthenticationFilter.class);
 
         return http.build();
