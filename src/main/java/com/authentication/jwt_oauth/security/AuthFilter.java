@@ -24,7 +24,6 @@ public class AuthFilter extends OncePerRequestFilter{
             }
         }
 
-        filterChain.doFilter(request, response); // estou apenas encaminhando a requisição como ela é
+        filterChain.doFilter(request, response);
     }
-
 }

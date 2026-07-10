@@ -19,7 +19,7 @@ import jakarta.servlet.http.HttpServletRequest;
 public class TokenUtil {
 
     public static final String EMISSOR = "TulioSploradori";
-    public static final long EXPIRATION = 15 * 1000;
+    public static final long EXPIRATION = 15 * 60 * 1000;
     public static final String SECRET_KEY = "0123456789012345678901234567890123456789";
 
     public static MyToken encode(User user) {

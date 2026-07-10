@@ -12,14 +12,14 @@ import jakarta.persistence.Table;
 public class User {
 
     @Id
-    @Column(name = "id")
+    @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "username", unique = true, nullable = false)
+    @Column(unique = true, nullable = false)
     private String username;
 
-    @Column(name = "password", nullable = false)
+    @Column(nullable = false)
     private String password;
 
     public Integer getId() {
